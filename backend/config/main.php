@@ -16,6 +16,12 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'CommentView' => [
+ 
+            'class' => 'backend\components\CommentView',
+ 
+            ],
+    
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

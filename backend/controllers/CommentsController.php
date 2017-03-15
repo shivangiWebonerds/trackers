@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Comments;
+use common\models\Issues;
 use common\models\CommentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -86,9 +87,26 @@ class CommentsController extends Controller
     {
         $model = new Comments();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $issues=Issues::findOne($model->issue_id);
+            $id=$model->issue_id;
+            // print_r($issues);
+            // print_r($model);
+            // echo" <br>id : ".Yii::$app->user->identity->id; 
+            // exit;
+            $model->type=$issues->title;
+            $model->user=Yii::$app->user->identity->id;
+            $model->comment_date=date('Y-m-d');
+            $model->created_at=date('Y-m-d');
+            $model->created_by=Yii::$app->user->identity->id;
+            // print_r($model);exit;
+            // echo" issue ID :".$model->issue_id; echo" Message :".$model->msg;exit;
+            $model->save(false);
+
+            return $this->redirect(['issues/view', 'id' => $id]);
         } else {
+            echo"in else";exit;
             return $this->render('create', [
                 'model' => $model,
             ]);

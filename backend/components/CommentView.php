@@ -5,14 +5,15 @@ namespace backend\components;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use common\models\IssuesSearch; 
+use common\models\Comments; 
  
 class CommentView extends Component
 {
-	 public function welcome()
+	 public function welcome($issue)
 	 {
-	 	$IssuesSearch = new IssuesSearch(); 
-	 	return Yii::$app->controller->renderPartial("/profile/search_by_id",['model'=>$ProfileSearch]);
+	 	//print_r($issue);exit;
+	 	$comments = new Comments(); 
+	 	return Yii::$app->controller->renderPartial("/issues/comment_view",['model'=>$comments,'issue'=>$issue]);
 	 }
  
 }

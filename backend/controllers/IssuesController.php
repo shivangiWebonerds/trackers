@@ -65,8 +65,20 @@ class IssuesController extends Controller
      */
     public function actionView($id)
     {
+        $model = new Issues();
+        //print_r($dataProvider);
+
+        $issues=Issues::findOne($id);
+        $comments=$issues->comments;
+        
+        // foreach ($comments as $c) {
+        //     echo "msg :".$c->msg."<br>";
+        // }
+        // exit;
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'comments'=>$comments,
         ]);
     }
 
