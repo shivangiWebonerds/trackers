@@ -92,6 +92,8 @@ class IssuesController extends Controller
         $model = new Issues();
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->created_at=date('Y-m-d');
+            $model->created_by=Yii::$app->user->identity->id;
 
             $imageName = "issue_image_".rand();
                $model->image = UploadedFile::getInstance($model,'image');
@@ -102,7 +104,7 @@ class IssuesController extends Controller
                        $model->image->saveAs('../../frontend/web/images/issues/'.$imageName.'.'.$model->image->extension);
                        $model->image = $imageName.'.'.$model->image->extension;
                        // echo "image: ".$model->image;exit;     
-                      $model->save();
+                      $model->save(false);
 
                     return $this->redirect(['view', 'id' => $model->id]); 
                 }
@@ -110,7 +112,7 @@ class IssuesController extends Controller
                 {
                        
                      $model->image = 'default_issue.png';                            
-                     $model->save();
+                     $model->save(false);
                     return $this->redirect(['view', 'id' => $model->id]); 
                }
             return $this->redirect(['view', 'id' => $model->id]);
@@ -165,7 +167,11 @@ class IssuesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=Issues::findOne($id);
+        $model->is_deleted=1;
+        $model->save(false);
+
+        //$this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
