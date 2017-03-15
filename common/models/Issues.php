@@ -81,4 +81,9 @@ class Issues extends \yii\db\ActiveRecord
             // 'is_deleted' => 'Is Deleted',
         ];
     }
+
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['issue_id' => 'id']);
+    }
 }
