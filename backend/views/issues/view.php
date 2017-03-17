@@ -42,7 +42,8 @@ $this->title = $model->title;
     </div>    
     <div class="row">
         <div class="col-md-4">
-            <img src="../../frontend/web/images/issues/<?= $model->image ?>" alt="issue image" style="width: 380px;
+        
+            <img src="../../public_html/images/issues/<?= $model->image ?>" alt="issue image" style="width: 380px;
     height: 444px;" class="img-thumbnail">
         </div>
         <div class="col-md-6">
@@ -111,7 +112,7 @@ $this->title = $model->title;
 
     <div class="">
 
-        <h1>Comments on issue <?= $model->title?> </h1>
+        <h1>Comments on issues of  <?= $model->title?> </h1>
         <!-- <a class="btn btn-primary" href="<?php //echo Url::toRoute(['comments/index','id'=>$model->id]);?>">View comment</a> -->
         <div class="row">
             <div class="col-md-10">
@@ -132,11 +133,12 @@ $this->title = $model->title;
                 <?php  
                     foreach ($comments as $comment) {
                 ?>
-                
+                    
                         
                             <tr>
+                                <?php $user=$comment->users;?>
                                 <td><?= $comment->type?></td>
-                                <td><?= $comment->user?></td>
+                                <td><?= $user->username?></td>
                                 <td><?= $comment->msg?></td>
                                 <td><?= $comment->comment_date?></td>
                             </tr>

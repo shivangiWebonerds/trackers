@@ -49,6 +49,7 @@ class IssuesController extends Controller
      */
     public function actionIndex()
     {
+    
         $searchModel = new IssuesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -101,7 +102,7 @@ class IssuesController extends Controller
                if(!empty($model->image))
                 {
                                                 
-                       $model->image->saveAs('../../frontend/web/images/issues/'.$imageName.'.'.$model->image->extension);
+                       $model->image->saveAs('../../public_html/images/issues/'.$imageName.'.'.$model->image->extension);
                        $model->image = $imageName.'.'.$model->image->extension;
                        // echo "image: ".$model->image;exit;     
                       $model->save(false);
@@ -141,7 +142,7 @@ class IssuesController extends Controller
            $model->image = UploadedFile::getInstance($model,'image');
 
            if(!empty($model->image)){
-                $model->image->saveAs('../../frontend/web/images/issues/'.$imageName.'.'.$model->image->extension);
+                $model->image->saveAs('../../public_html/images/issues/'.$imageName.'.'.$model->image->extension);
                   echo $imageName.'.'.$model->image->extension;
                    $model->image = $imageName.'.'.$model->image->extension;
                    $model->save();

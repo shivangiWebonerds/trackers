@@ -103,8 +103,12 @@ class CommentsController extends Controller
             // print_r($model);exit;
             // echo" issue ID :".$model->issue_id; echo" Message :".$model->msg;exit;
             $model->save(false);
+            if($model->save(false)){
+                Yii::$app->session->setFlash('success', "Comment Added Successfully...!!!");
+                Yii::$app->response->redirect(['issues/view', 'id' => $id]);    
+            }
 
-            return $this->redirect(['issues/view', 'id' => $id]);
+            
         } else {
             echo"in else";exit;
             return $this->render('create', [

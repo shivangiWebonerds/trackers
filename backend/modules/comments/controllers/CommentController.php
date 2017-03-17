@@ -1,0 +1,32 @@
+<?php
+
+namespace backend\modules\comments\controllers;
+
+use yii;
+use yii\rest\ActiveController;
+use yii\web\Response;
+use common\models\Comments;
+
+class CommentController extends ActiveController
+{
+	public $modelClass='common\models\Comments';//Users class must be exist in common/models
+ 
+
+	public function behaviors()
+	{
+		$behaviors = parent::behaviors();
+		$behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_JSON;//convert data into json format 
+		
+		$behaviors['corsFilter'] = [
+        'class' => \yii\filters\Cors::className(),
+    	];
+
+		return $behaviors;
+	}
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
+}

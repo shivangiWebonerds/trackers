@@ -28,6 +28,8 @@ use Yii;
  */
 class Issues extends \yii\db\ActiveRecord
 {
+
+    public $commentsList; 
     /**
      * @inheritdoc
      */
@@ -69,10 +71,10 @@ class Issues extends \yii\db\ActiveRecord
             'raised_date' => 'Raised Date',
             'completion_date' => 'Completion Date',
             'status' => 'Status',
-            'loclat' => 'Loclat',
-            'loclong' => 'Loclong',
+            'loclat' => 'latitude',
+            'loclong' => 'longitude',
             'image' => 'Image',
-            'dept' => 'Dept',
+            'dept' => 'Department',
             'vote' => 'Vote',
             // 'created_at' => 'Created At',
             // 'created_by' => 'Created By',

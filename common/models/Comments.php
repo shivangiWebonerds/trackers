@@ -63,4 +63,9 @@ class Comments extends \yii\db\ActiveRecord
             // 'is_deleted' => 'Is Deleted',
         ];
     }
+
+    public function getUsers()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user']);
+    }
 }
